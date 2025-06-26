@@ -1,37 +1,19 @@
-// === ELEMENT REFERENCES ===
 const notesContainer = document.getElementById('notes-container');
 const noteInput = document.getElementById('note-input');
 const quoteElement = document.getElementById('quote');
 const audio = document.getElementById('note-sound');
 const themeToggle = document.getElementById('theme-toggle');
 const background = document.getElementById('background');
+const lofiToggle = document.getElementById('lofi-toggle');
+const lofiAudio = document.getElementById('lofi-audio');
 
-
-// === MOTIVATIONAL QUOTES ===
-const quotes = [
-  "Believe in yourself and all that you are.",
-  "Progress, not perfection.",
-  "You are stronger than you think.",
-  "Every day is a second chance.",
-  "Small steps every day lead to big results.",
-  "Don't watch the clock; do what it does: keep going.",
-  "Push yourself, because no one else is going to do it for you."
-];
-
-function setMotivationalQuote() {
-  const index = Math.floor(Math.random() * quotes.length);
-  quoteElement.textContent = quotes[index];
-}
-
-setMotivationalQuote();
-setInterval(setMotivationalQuote, 30 * 60 * 1000); // every 30 minutes
-
+// === FIXED QUOTE ===
+quoteElement.textContent = '"It takes 10,000 hours to master something." — Andrej Karpathy';
 
 // === NOTES ===
 function loadNotes() {
   const notes = JSON.parse(localStorage.getItem('notes')) || [];
   notesContainer.innerHTML = '';
-
   notes.forEach((note, index) => {
     const noteDiv = createNoteElement(note, index);
     notesContainer.appendChild(noteDiv);
@@ -43,14 +25,11 @@ function createNoteElement(text, index) {
   noteDiv.className = 'note';
   noteDiv.textContent = text;
   noteDiv.contentEditable = true;
-
   noteDiv.addEventListener('input', () => updateNote(index, noteDiv.textContent));
-
   const deleteBtn = document.createElement('button');
   deleteBtn.textContent = 'Delete';
   deleteBtn.className = 'delete-btn';
   deleteBtn.onclick = () => deleteNote(index);
-
   noteDiv.appendChild(deleteBtn);
   return noteDiv;
 }
@@ -75,8 +54,7 @@ function updateNote(index, newText) {
   localStorage.setItem('notes', JSON.stringify(notes));
 }
 
-
-// === EVENT: ENTER KEY TO ADD NOTE ===
+// === ENTER KEY TO ADD NOTE ===
 noteInput.addEventListener('keydown', function (e) {
   if (e.key === 'Enter' && !e.shiftKey) {
     e.preventDefault();
@@ -84,14 +62,11 @@ noteInput.addEventListener('keydown', function (e) {
     if (text !== '') {
       addNote(text);
       noteInput.value = '';
-
-      // Play sound
       audio.currentTime = 0;
       audio.play();
     }
   }
 });
-
 
 // === DARK MODE TOGGLE ===
 themeToggle.addEventListener('click', () => {
@@ -111,11 +86,25 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// === LOFI MUSIC MP3 TOGGLE ===
+let lofiPlaying = false;
+lofiToggle.addEventListener('click', () => {
+  if (!lofiPlaying) {
+    lofiAudio.play();
+    lofiToggle.classList.add('active');
+    lofiToggle.textContent = "🔇 Stop Lofi";
+    lofiPlaying = true;
+  } else {
+    lofiAudio.pause();
+    lofiAudio.currentTime = 0;
+    lofiToggle.classList.remove('active');
+    lofiToggle.textContent = "🎵 Lofi";
+    lofiPlaying = false;
+  }
+});
 
-// === FALLING OBJECTS (LEAVES + STARS) ===
+// === FALLING OBJECTS (Stars & Leaves) ===
 const images = ['star.png', 'leaf.jpg'];
-
-
 function createFallingObject() {
   const img = document.createElement('div');
   img.classList.add('falling-object');
@@ -125,32 +114,7 @@ function createFallingObject() {
   background.appendChild(img);
   setTimeout(() => img.remove(), 10000);
 }
-
 setInterval(createFallingObject, 500);
-
 
 // === INITIAL LOAD ===
 window.onload = loadNotes;
-// === FIXED QUOTE ===
-quoteElement.textContent = '"It takes 10,000 hours to master something." — Andrej Karpathy';
-
-// === LOFI BUTTON YOUTUBE AUDIO ONLY ===
-const lofiToggle = document.getElementById('lofi-toggle');
-let lofiPlaying = false;
-let lofiIframe;
-
-lofiToggle.addEventListener('click', () => {
-  if (!lofiPlaying) {
-    lofiIframe = document.createElement('iframe');
-    lofiIframe.style.display = 'none';
-    lofiIframe.src = "https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&loop=1&playlist=jfKfPfyJRdk";
-    lofiIframe.allow = "autoplay";
-    document.body.appendChild(lofiIframe);
-    lofiPlaying = true;
-    lofiToggle.textContent = "🔇 Stop Lofi";
-  } else {
-    if (lofiIframe) lofiIframe.remove();
-    lofiPlaying = false;
-    lofiToggle.textContent = "🎵 Lofi";
-  }
-});
