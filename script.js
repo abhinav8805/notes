@@ -131,3 +131,26 @@ setInterval(createFallingObject, 500);
 
 // === INITIAL LOAD ===
 window.onload = loadNotes;
+// === FIXED QUOTE ===
+quoteElement.textContent = '"It takes 10,000 hours to master something." — Andrej Karpathy';
+
+// === LOFI BUTTON YOUTUBE AUDIO ONLY ===
+const lofiToggle = document.getElementById('lofi-toggle');
+let lofiPlaying = false;
+let lofiIframe;
+
+lofiToggle.addEventListener('click', () => {
+  if (!lofiPlaying) {
+    lofiIframe = document.createElement('iframe');
+    lofiIframe.style.display = 'none';
+    lofiIframe.src = "https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&loop=1&playlist=jfKfPfyJRdk";
+    lofiIframe.allow = "autoplay";
+    document.body.appendChild(lofiIframe);
+    lofiPlaying = true;
+    lofiToggle.textContent = "🔇 Stop Lofi";
+  } else {
+    if (lofiIframe) lofiIframe.remove();
+    lofiPlaying = false;
+    lofiToggle.textContent = "🎵 Lofi";
+  }
+});
