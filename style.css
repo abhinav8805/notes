@@ -124,4 +124,19 @@ body {
     background: #fdd835;
     color: black;
   }
+
+#lofi-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 0.5rem 1rem;
+  background: #7b1fa2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 2;
+  font-weight: bold;
+}
+
   
