@@ -58,7 +58,7 @@ body.dark #lofi-toggle.active {
 
 #quote {
   font-size: 1.2rem;
-  margin-top: 4.5rem;
+  margin-top: 3rem;
   text-align: center;
   padding: 0 1rem;
   color: #333;
@@ -172,7 +172,7 @@ body.dark .note {
 
   #quote {
     font-size: 1rem;
-    margin-top: 6rem;
+    margin-top: 3rem;
     padding: 0 1rem;
   }
 
@@ -210,3 +210,7 @@ body.dark .note {
     right: 6px;
   }
 }
+#background {
+  transition: background-color 0.3s ease;
+}
+
