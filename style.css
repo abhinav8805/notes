@@ -231,3 +231,64 @@ body.dark .note {
     right: 6px;
   }
 }
+#wish-tab {
+  position: fixed;
+  top: 40%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+#wish-pull {
+  background: #2e7d32;
+  color: white;
+  padding: 0.5rem 0.8rem;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#wish-panel {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  width: 160px;
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+#wish-panel label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
+#wish-panel button {
+  background: #2196f3;
+  color: white;
+  border: none;
+  padding: 0.4rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* Dark Mode Support */
+body.dark #wish-panel {
+  background: #2c2c2c;
+  border-color: #555;
+  color: #f5f5f5;
+}
+
+body.dark #wish-panel button {
+  background: #4fc3f7;
+  color: #000;
+}
