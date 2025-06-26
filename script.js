@@ -116,5 +116,32 @@ function createFallingObject() {
 }
 setInterval(createFallingObject, 500);
 
+const wishPull = document.getElementById('wish-pull');
+const wishPanel = document.getElementById('wish-panel');
+const wishToggle = document.getElementById('wish-toggle');
+const wishAudio = document.getElementById('wish-audio');
+const appreciateBtn = document.getElementById('appreciate-btn');
+
+// Toggle panel visibility
+wishPull.addEventListener('click', () => {
+  wishPanel.style.display = wishPanel.style.display === 'flex' ? 'none' : 'flex';
+});
+
+// Toggle wish mode audio
+wishToggle.addEventListener('change', () => {
+  if (wishToggle.checked) {
+    wishAudio.currentTime = 0;
+    wishAudio.play();
+  } else {
+    wishAudio.pause();
+  }
+});
+
+// Appreciate button alert
+appreciateBtn.addEventListener('click', () => {
+  alert("Thanks for appreciating the developer 💚");
+});
+
+
 // === INITIAL LOAD ===
 window.onload = loadNotes;
